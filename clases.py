@@ -1,5 +1,5 @@
 import pygame as pg
-import constants as c
+import constantes as c
 
 class Wall(pg.sprite.Sprite):
     def __init__(self, POS_X, POS_Y, width, height, image_path = None):
@@ -9,21 +9,23 @@ class Wall(pg.sprite.Sprite):
             self.image = pg.transform.scale(self.image, (width, height))
         else:
             self.image = pg.Surface([width, height])
-            self.image.fill(c.BLACK)
+            self.image.fill(c.COLORS['black'])
 
         self.rect = self.image.get_rect()
         self.rect.x = POS_X
         self.rect.y = POS_Y
 
 class Player(pg.sprite.Sprite):
-    def __init__(self, POS_X, POS_Y, walls_group, img_dict):
+    def __init__(self, POS_X, POS_Y, walls_group, img_dict=None):
         super().__init__()
+        if img_dict is None:
+            img_dict = c.PLAYER_IMAGES
         self.walls = walls_group
-        self.img_dict = self._load_images(img_dict)
+        self.animations = self._load_images(img_dict)
         self.direction = 'DOWN'
         self.is_moving = False
         self.frame_count = 0
-        self.animation_speed = 5
+        self.animation_speed = 2
         self.current_frame = 0
         self.image = self.animations[self.direction][self.current_frame]
         self.rect = self.image.get_rect()
@@ -102,7 +104,7 @@ class Player(pg.sprite.Sprite):
         self.animate()
         self.move_and_collide()
 
-class Enemy(pg.sprite.Sprite):
+'''class Enemy(pg.sprite.Sprite):
     def __init__(self, POS_X, POS_Y, walls_group):
         super().__init__()
         self.walls = walls_group
@@ -131,7 +133,7 @@ class Enemy(pg.sprite.Sprite):
                 if self.vel_y > 0:
                     self.rect.bottom = hit.rect.top
                 else:
-                    self.rect.top = hit.rect.bottom
+                    self.rect.top = hit.rect.bottom'''
 
             
 

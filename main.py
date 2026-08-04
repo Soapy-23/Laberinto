@@ -1,11 +1,11 @@
 import pygame as pg
-import constantes as cons
+import constantes as c
 import sys
 import maze
 
 def main():
     pg.init()
-    screen = pg.display.set_mode((cons.WINDOW_WIDTH, cons.WINDOW_HEIGHT))
+    screen = pg.display.set_mode((c.WINDOW_WIDTH, c.WINDOW_HEIGHT))
     pg.display.set_caption("Maze")
     clock = pg.time.Clock()
     walls_group = pg.sprite.Group()
@@ -19,7 +19,7 @@ def main():
                 running = False
         maze_obj.run(screen)
         pg.display.flip()
-        clock.tick(60)
+        clock.tick(30)
     pg.quit()
     sys.exit()
 

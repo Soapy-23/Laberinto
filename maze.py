@@ -3,22 +3,28 @@ import constantes as c
 from clases import Wall, Player
 
 MAZE_LAYOUT = [
-    'WWWWWWWWWWWW',
-    'W    P     W',
-    'W  W   W   W',
-    'W  W   W   W',
-    'W     E    W',
-    'W         WW',
-    'W  W  W W  W'
-    'W  W   W W W'
-    'W  W   W W W'
-    'W  W   W   W'
-    'W  W   W W W'
-    'W  W   W W W'
-    'W  W   W W W'
-    'W  W   W   W'
-    'W  W   W   W'
-    'W WWWWWWWWWW'
+    'WWWWWWWWWWWWWWWWWWWWW',
+    'W                   W',
+    'W       P           W',
+    'W                   W',
+    'W     W       W     W',
+    'W     W       W     W',
+    'W                   W',
+    'W                   W',
+    'W     W        W W  W',
+    'W     W         W W W',
+    'W     W         W W W',
+    'W     W      W      W',
+    'W                   W',
+    'W                   W',
+    'W     W      W W    W',
+    'W     W      W W    W',
+    'W                   W',
+    'W                   W',
+    'W     W     W W W W W',
+    'W     W     W     W W',
+    'W     W     W     W W',
+    'W     WWWWWWWWWW'
 ]
 
 class Level:
@@ -33,19 +39,19 @@ class Level:
         for y, fila in enumerate(self.layout):
             for x, char in enumerate(fila):
                 if char == 'W':
-                    wall = Wall(x * c.CELL_SIZE, y * c.CELL_SIZE, c.CELL_SIZE, c.CELL_SIZE)
+                    wall = Wall(x * c.CELL_SIZE, y * c.CELL_SIZE, c.CELL_SIZE, c.CELL_SIZE, c.WALL_IMAGE)
                     self.walls_group.add(wall)
                     self.all_sprites_group.add(wall)
                 if char == 'P':
                     self.player = Player(x * c.CELL_SIZE, y * c.CELL_SIZE, self.walls_group)
                     self.player_group.add(self.player)
                     self.all_sprites_group.add(self.player)
-                if char == 'E':
+                '''if char == 'E':
                     self.enemy = Enemy(x * c.CELL_SIZE, y * c.CELL_SIZE, self.walls_group)
                     self.enemy_group.add(self.enemy)
-                    self.all_sprites_group.add(self.enemy)
+                    self.all_sprites_group.add(self.enemy)'''
 
     def run(self, surface):
         self.all_sprites_group.update()
-        surface.blit(cons.BACKGROUND, (0, 0))
+        surface.blit(c.BACKGROUND, (0, 0))
         self.all_sprites_group.draw(surface)
